@@ -28,7 +28,7 @@ class Genre(db.Model):
     name = db.Column(db.String(255))
 
 
-class Movie_Schema(Schema):
+class MovieSchema(Schema):
     id = fields.Int()
     title = fields.Str()
     description = fields.Str()
@@ -39,11 +39,11 @@ class Movie_Schema(Schema):
     director_id = fields.Int()
 
 
-class Genre_Schema(Schema):
+class GenreSchema(Schema):
     id = fields.Int()
     name = fields.Str()
 
 
-class Director_Schema(Schema):
+class DirectorSchema(Schema):
     id = fields.Int()
     name = fields.Str()
