@@ -1,7 +1,6 @@
 from flask import jsonify, request
 from flask_restx import Namespace, Resource
-
-from app.models import Movie, Movie_Schema
+from app.models import Movie, MovieSchema
 from app.setup_db import db
 from app.utils import get_movies_by_both_parameters, get_movies_by_genre, get_movies_by_director, get_movies_by_year
 
@@ -30,15 +29,17 @@ class MoviesView(Resource):
         new_movie = Movie(**req_json)
         with db.session.begin():
             db.session.add(new_movie)
+        return "", 201
+
 
 @movies_ns.route('/<int:mid>')
 class MovieView(Resource):
     def get(self, mid):
-        movie_schema = Movie_Schema()
+        movieSchema = MovieSchema()
         movie = Movie.query.get(mid)
         if not movie:
             return "", 404
-        return jsonify(movie_schema.dump(movie))
+        return jsonify(movieSchema.dump(movie))
 
     def put(self, mid: int):
         movie = Movie.query.get(mid)
